@@ -14,6 +14,7 @@ const Login = () => {
                     <SignIn>Sign In</SignIn>
                 </div>
             </Nav>
+            <Section>Section</Section>
         </Container>
     )
 }
@@ -71,6 +72,23 @@ const SignIn = styled.a`
         color: #0a66c2;
         text-decoration: none;
     }
+    `
+
+const Section = styled.section`
+        display: flex;
+        align-content: start;
+        min-height: 700px;
+        padding:60px 0 130px;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 1128px;
+        align-items: center;
+        margin: auto;
+        @media (max-width: 768px) {
+            margin: auto;
+            min-height: 0px;
+        }
+
     `
 
 export default Login
