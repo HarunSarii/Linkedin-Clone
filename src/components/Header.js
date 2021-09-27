@@ -58,6 +58,9 @@ const Header = () => {
                                 <span>Me</span>
                                 <img src="/images/down-icon.svg" alt="down" />
                             </a>
+                            <SignOut>
+                                <a href="">Sign out</a>
+                            </SignOut>
                         </User>
                         <Work>
                             <a>
@@ -208,6 +211,19 @@ const Navlist = styled.li`
     } 
 
 `
+const SignOut = styled.div`
+    position: absolute;
+    top: 45px;
+    background: white;
+    border-radius: 0 0 5px 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    transition-duration: 167ms;
+    text-align: center;
+    display: none;
+
+`
 
 const User = styled(Navlist)`
     a > svg {
@@ -225,10 +241,19 @@ const User = styled(Navlist)`
         display: flex;
         align-items: center;
     }
+    &:hover {
+        ${SignOut} {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+        }
+    }
 `
 
 const Work = styled(User)`
     border-left: 1px solid rgba(0,0,0,0.08);
     `
+
 
 export default Header
