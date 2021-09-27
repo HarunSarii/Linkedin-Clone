@@ -11,11 +11,49 @@ const Header = () => {
                 <Search>
                     <div>
                         <input type="text" placeholder='Search' />
-                        <SearchIcon>
-                            <img src="/images/search-icon.svg" alt="search" />
-                        </SearchIcon>
                     </div>
+                    <SearchIcon>
+                        <img src="/images/search-icon.svg" alt="search" />
+                    </SearchIcon>
                 </Search>
+                <Nav>
+                    <NavlistWrap>
+                        <Navlist className='active'>
+                            <a>
+                                <img src="/images/nav-home.svg" alt="home" />
+                                <span>Home</span>
+                            </a>
+                        </Navlist>
+
+                        <Navlist>
+                            <a>
+                                <img src="/images/nav-network.svg" alt="home" />
+                                <span>My Network</span>
+                            </a>
+                        </Navlist>
+
+                        <Navlist>
+                            <a>
+                                <img src="/images/nav-jobs.svg" alt="home" />
+                                <span>Jobs</span>
+                            </a>
+                        </Navlist>
+
+                        <Navlist>
+                            <a>
+                                <img src="/images/nav-messaging.svg" alt="home" />
+                                <span>Messaging</span>
+                            </a>
+                        </Navlist>
+
+                        <Navlist>
+                            <a>
+                                <img src="/images/nav-notifications.svg" alt="home" />
+                                <span>Notifications</span>
+                            </a>
+                        </Navlist>
+                    </NavlistWrap>
+                </Nav>
             </Content>
         </Container>
     )
@@ -85,6 +123,75 @@ const SearchIcon = styled.div`
         justify-content: center;
         align-items: center;
     `
+const Nav = styled.div`
+    margin-left: auto;
+    display: block;
+    @media (max-width: 768px) {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        background-color: white;
+        width: 100%;
 
+
+    }
+`
+
+const NavlistWrap = styled.ul`
+    display: flex;
+    flex-wrap: nowrap;
+    list-style-type: none;
+
+    .active {
+        span:after{
+            content: '';
+            transform: scaleX(1);
+            border-bottom: 2px solid var(--white, #fff);
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            transition: transform 0.2s ease-in-out;
+            width: 100%;
+            border-color: rgba(0,0,0,0.9);
+        }
+    }
+
+`
+
+const Navlist = styled.li`
+    display: flex;
+    align-items: center;
+    a {
+        align-items: center;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        font-weight: 400;
+        justify-content: center;
+        line-height: 1.5;
+        min-height: 52px;
+        min-width: 80px;
+        position: relative;
+        text-decoration: none;
+
+        span {
+            color: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+        }
+        @media (max-width: 768px){
+            min-width: 70px;
+        }
+    }
+    &:hover, &:active {
+        a {
+            span {
+                color: rgba(0,0,0, 0.9)
+            }
+        }
+    } 
+
+`
 
 export default Header
