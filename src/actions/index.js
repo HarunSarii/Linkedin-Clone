@@ -8,11 +8,11 @@ export const setUser = (payload) => ({
 
 export function signInAPI() {
     return (dispatch) => {
-        auth
-            .signInWithPopup(provider)
-            .then((payload) => {
-                dispatch(setUser(payload.user))
-            }).catch((error) => alert(error.message))
+        auth.signInWithPopup(provider).then((payload) => {
+            dispatch(setUser(payload.user));
+        }).catch((error) => {
+            alert(error.message)
+        });
     }
 }
 

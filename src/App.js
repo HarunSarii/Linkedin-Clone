@@ -7,9 +7,9 @@ import Login from './components/Login';
 import { getUserAuth } from './actions';
 import { connect } from 'react-redux';
 
-function App(props) {
+function App() {
   useEffect(()=> {
-    props.getUserAuth();
+    getUserAuth();
   }, [])
   return (
     <div className="App">
@@ -28,7 +28,7 @@ function App(props) {
   );
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
   return {}
 }
 
