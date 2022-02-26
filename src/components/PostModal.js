@@ -9,7 +9,6 @@ const PostModal = (props) => {
     props.handleClick(e)
   }
 
-  console.log('modal:', props.showModal);
   return (
     <>
       {props.showModal === "open" &&

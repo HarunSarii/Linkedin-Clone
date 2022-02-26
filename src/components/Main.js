@@ -11,7 +11,6 @@ const Main = () => {
     const [showModal, setShowModal] = useState("close");
 
     const handleClick = (e) => {
-        console.log('clicked handleClick');
         e.preventDefault();
         if (e.target !== e.currentTarget) {
             return;
