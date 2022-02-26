@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const PostModal = () => {
+    const [editorText, setEditorText] = useState('')
     return (
         <Container>
             <Content>
@@ -17,6 +18,14 @@ const PostModal = () => {
                         <img src="/images/user.svg" alt='' />
                         <span>Name</span>
                     </UserInfo>
+                    <Editor>
+                        <textarea
+                            value={editorText}
+                            onChange={(e) => setEditorText(e.target.value)}
+                            placeholder="What do you want to talk about?"
+                            autoFocus={true}
+                        ></textarea>
+                    </Editor>
                 </SharedContent>
 
                 <ShareCreation>
@@ -170,6 +179,21 @@ const PostButton = styled.button`
     color: white;
     &:hover {
         color:black;
+    }
+`;
+
+const Editor = styled.div`
+    padding: 12px 24px;
+    textarea {
+        width: 100%;
+        min-height: 100px;
+        resize: none;
+    }
+    input {
+        width: 100%;
+        height: 35px;
+        font-size: 16px;
+        margin-bottom: 20px;
     }
 `;
 
