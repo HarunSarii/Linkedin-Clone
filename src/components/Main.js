@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import OndemandVideoOutlinedIcon from "@mui/icons-material/OndemandVideoOutlined";
@@ -8,13 +8,35 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PostModal from "./PostModal";
 
 const Main = () => {
+    const [showModal, setShowModal] = useState("close");
+
+    const handleClick = (e) => {
+        console.log('clicked handleClick');
+        e.preventDefault();
+        if (e.target !== e.currentTarget) {
+            return;
+        }
+
+        switch (showModal) {
+            case "open":
+                setShowModal("close");
+                break;
+            case "close":
+                setShowModal("open");
+                break;
+            default:
+                setShowModal("close");
+                break
+        }
+
+    }
     return (
         <Container>
             <ShareBox>
                 Share
                 <div>
                     <img src="/images/user.svg" alt="" />
-                    <button>Start a post</button>
+                    <button onClick={handleClick} >Start a post</button>
                 </div>
                 <div>
                     <button>
@@ -92,7 +114,7 @@ const Main = () => {
                     </SocialActions>
                 </Article>
             </div>
-            <PostModal />
+            <PostModal showModal={showModal} handleClick={handleClick}  />
         </Container>
     );
 };

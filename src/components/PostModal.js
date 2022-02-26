@@ -1,57 +1,68 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const PostModal = () => {
-    const [editorText, setEditorText] = useState('')
-    return (
+const PostModal = (props) => {
+  const [editorText, setEditorText] = useState('');
+
+  const reset = (e) => {
+    setEditorText("");
+    props.handleClick(e)
+  }
+
+  console.log('modal:', props.showModal);
+  return (
+    <>
+      {props.showModal === "open" &&
         <Container>
-            <Content>
-                <Header>
-                    <h2>Create a post</h2>
-                    <button>
-                        <img src="/images/close-icon.png" alt="" />
-                    </button>
-                </Header>
+          <Content>
+            <Header>
+              <h2>Create a post</h2>
+              <button onClick={(event) => reset(event)}>
+                <img src="/images/close-icon.png" alt="" />
+              </button>
+            </Header>
 
-                <SharedContent>
-                    <UserInfo>
-                        <img src="/images/user.svg" alt='' />
-                        <span>Name</span>
-                    </UserInfo>
-                    <Editor>
-                        <textarea
-                            value={editorText}
-                            onChange={(e) => setEditorText(e.target.value)}
-                            placeholder="What do you want to talk about?"
-                            autoFocus={true}
-                        ></textarea>
-                    </Editor>
-                </SharedContent>
+            <SharedContent>
+              <UserInfo>
+                <img src="/images/user.svg" alt='' />
+                <span>Name</span>
+              </UserInfo>
+              <Editor>
+                <textarea
+                  value={editorText}
+                  onChange={(e) => setEditorText(e.target.value)}
+                  placeholder="What do you want to talk about?"
+                  autoFocus={true}
+                ></textarea>
+              </Editor>
+            </SharedContent>
 
-                <ShareCreation>
-                    <AttachAssets>
-                        <AssetButton>
-                            <img src='/images/share-image.svg' alt='' /> {/* #70b5f9 */}
-                        </AssetButton>
-                        <AssetButton>
-                            <img src='/images/share-video.svg' alt='' /> {/* #7fc15e */}
-                        </AssetButton>
-                    </AttachAssets>
+            <ShareCreation>
+              <AttachAssets>
+                <AssetButton>
+                  <img src='/images/share-image.svg' alt='' /> {/* #70b5f9 */}
+                </AssetButton>
+                <AssetButton>
+                  <img src='/images/share-video.svg' alt='' /> {/* #7fc15e */}
+                </AssetButton>
+              </AttachAssets>
 
-                    <ShareComment>
-                        <AssetButton>
-                            <img src="/images/share-comment.svg" alt='' />
-                            Anyone
-                        </AssetButton>
+              <ShareComment>
+                <AssetButton>
+                  <img src="/images/share-comment.svg" alt='' />
+                  Anyone
+                </AssetButton>
 
-                    </ShareComment>
-                    <PostButton>
-                        Post
-                    </PostButton>
-                </ShareCreation>
-            </Content>
+              </ShareComment>
+              <PostButton>
+                Post
+              </PostButton>
+            </ShareCreation>
+          </Content>
         </Container>
-    )
+      }
+    </>
+  )
 }
 
 const Container = styled.div`
@@ -95,7 +106,7 @@ const Header = styled.div`
         width: 40px;
         min-width: auto;
         color: rgba(0,0,0,0.15);
-        img {
+        img, svg {
             max-width: 80%;
             max-height: 80%;
             pointer-events: none;
