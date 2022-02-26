@@ -53,7 +53,7 @@ const PostModal = (props) => {
                 </AssetButton>
 
               </ShareComment>
-              <PostButton>
+              <PostButton disabled={!editorText ? true : false} >
                 Post
               </PostButton>
             </ShareCreation>
@@ -73,6 +73,7 @@ const Container = styled.div`
     z-index: 9999;
     color: black;
     background-color: rgba(0,0,0,0.8);
+    animation: fadeIn 0.5s ;
 `;
 
 const Content = styled.div`
@@ -185,10 +186,10 @@ const PostButton = styled.button`
     border-radius: 20px;
     padding-left: 16px;
     padding-right: 16px;
-    background: #0a66c2;
-    color: white;
+    background: ${(props) => (props.disabled ? "rgba(0,0,0,0.8)" : "#0a66c2" )} ;
+    color: ${(props) => (props.disabled ? "#d3d3d3" : "white")};
     &:hover {
-        color:black;
+        background:  ${(props) => (props.disabled ? "rgba(0,0,0,0.08)" : "#004182")};
     }
 `;
 
