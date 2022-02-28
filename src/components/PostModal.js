@@ -6,6 +6,7 @@ const PostModal = (props) => {
   const [editorText, setEditorText] = useState('');
   const [shareImage, setShareImage] = useState('');
   const [videoLink, setVideoLink] = useState('');
+  const [assetArea, setAssetArea] = useState('');
 
   const handleChange = (e) => {
     const image = e.target.files[0];
@@ -15,11 +16,18 @@ const PostModal = (props) => {
       return;
     }
     setShareImage(image);
+  }
 
+  const switchAssetArea = (area) => {
+    setShareImage("");
+    setVideoLink("");
+    setAssetArea(area);
   }
 
   const reset = (e) => {
     setEditorText("");
+    setShareImage("");
+    setVideoLink("");
     props.handleClick(e)
   }
 
@@ -46,41 +54,47 @@ const PostModal = (props) => {
                   onChange={(e) => setEditorText(e.target.value)}
                   placeholder="What do you want to talk about?"
                   autoFocus={true}
-                ></textarea>
-                <UploadImage>
-                  <input 
-                  type="file" 
-                  accept='image/gif, image/jpeg, image/png'
-                  name = 'image' 
-                  id="file"
-                  style={{display: 'none'}}
-                  onChange={handleChange}
-                  />
-                  <p>
-                    <label htmlFor='file'>Select an image to share</label>
-                  </p>
-                  {shareImage && <img src={URL.createObjectURL(shareImage)} />}
-                  <>
-                  <input
-                    type="text"
-                    placeholder="Please input a video link"
-                    value={videoLink}
-                    onChange={(e) => setVideoLink(e.target.value) }
-                  />
-                  {
-                    videoLink && <ReactPlayer width={"100%"} url={videoLink} />
-                  }
-                  </>
-                </UploadImage>
+                />
+                {assetArea === "image" ? (
+                  <UploadImage>
+                    <input
+                      type="file"
+                      accept='image/gif, image/jpeg, image/png'
+                      name='image'
+                      id="file"
+                      style={{ display: 'none' }}
+                      onChange={handleChange}
+                    />
+                    <p>
+                      <label htmlFor='file'>Select an image to share</label>
+                    </p>
+                    {shareImage && <img src={URL.createObjectURL(shareImage)} />}
+                  </UploadImage>
+                )
+                  :
+                  assetArea === "media" && (
+                    <>
+                      <input
+                        type="text"
+                        placeholder="Please input a video link"
+                        value={videoLink}
+                        onChange={(e) => setVideoLink(e.target.value)}
+                      />
+                      {
+                        videoLink && <ReactPlayer width={"100%"} url={videoLink} />
+                      }
+                    </>
+                  )
+                }
               </Editor>
             </SharedContent>
 
             <ShareCreation>
               <AttachAssets>
-                <AssetButton>
+                <AssetButton onClick={() => switchAssetArea("image")}>
                   <img src='/images/share-image.svg' alt='' /> {/* #70b5f9 */}
                 </AssetButton>
-                <AssetButton>
+                <AssetButton onClick={() => switchAssetArea("media")}>
                   <img src='/images/share-video.svg' alt='' /> {/* #7fc15e */}
                 </AssetButton>
               </AttachAssets>
@@ -225,7 +239,7 @@ const PostButton = styled.button`
     border-radius: 20px;
     padding-left: 16px;
     padding-right: 16px;
-    background: ${(props) => (props.disabled ? "rgba(0,0,0,0.8)" : "#0a66c2" )} ;
+    background: ${(props) => (props.disabled ? "rgba(0,0,0,0.8)" : "#0a66c2")} ;
     color: ${(props) => (props.disabled ? "#d3d3d3" : "white")};
     &:hover {
         background:  ${(props) => (props.disabled ? "rgba(0,0,0,0.08)" : "#004182")};
