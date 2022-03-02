@@ -58,6 +58,18 @@ export function postArticleAPI(payload) {
             }, error => console.log(error.code),
             async () => {
                 const downloadURL = await upload.snapshot.ref.getDownloadURL();
+                db.collection("articles").add({
+                    actors: {
+                        description: payload.user.email,
+                        title: payload.user.displayName,
+                        date: payload.timestamp,
+                        image: payload.user.photoURL
+                    },
+                    video: payload.video,
+                    sharedImg: downloadURL,
+                    comments: 0,
+                    description: payload.description,
+                })
             }
             );
         }
