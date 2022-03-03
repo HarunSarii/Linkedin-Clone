@@ -43,7 +43,7 @@ export function signOutAPI() {
 
 export function postArticleAPI(payload) {
     return (dispatch) => {
-        if (payload.image != "") {
+        if (payload.image !== "") {
             const upload = storage
                 .ref(`images/${payload.image.name}`)
                 .put(payload.image);
@@ -51,9 +51,9 @@ export function postArticleAPI(payload) {
                 const progress = (
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 
-                console.log(`Progress: $(progress)%`);
+                console.log(`Progress: ${progress}%`);
                 if (snapshot.state === "RUNNING") {
-                    console.log(`Progress: $(progress)%`);
+                    console.log(`Progress: ${progress}%`);
                 }
             }, error => console.log(error.code),
             async () => {
