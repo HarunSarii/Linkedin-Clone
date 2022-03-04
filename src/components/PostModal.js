@@ -305,4 +305,4 @@ const mapDispatchTopProps = (dispatch) => ({
   postArticle: (payload) => dispatch(postArticleAPI(payload))
 })
 
-export default connect(mapStateToProps, mapDispatchTopProps)(PostModal);
+export default connect(mapStateToProps, mapDispatchTopProps)(PostModal)

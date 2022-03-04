@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import OndemandVideoOutlinedIcon from "@mui/icons-material/OndemandVideoOutlined";
@@ -7,9 +7,14 @@ import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PostModal from "./PostModal";
 import { connect } from "react-redux";
+import { getArticlesAPI } from "../actions";
 
 const Main = (props) => {
   const [showModal, setShowModal] = useState("close");
+
+  useEffect(() => {
+    props.getArticles()
+  }, [])
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -31,97 +36,104 @@ const Main = (props) => {
 
   }
   return (
-    <Container>
-      <ShareBox>
-        <div>
-          {props.user && props.user.photoURL ?
-            <img src={props.user.photoURL} />
-            :
-            <img src="/images/user.svg" alt="" />
-          }
-          <button onClick={handleClick} disabled={props.loading} >Start a post</button>
-        </div>
-        <div>
-          <button>
-            <InsertPhotoOutlinedIcon className="icon" />
-            <span>Photo</span>
-          </button>
-
-          <button>
-            <OndemandVideoOutlinedIcon />
-            <span>Video</span>
-          </button>
-
-          <button>
-            <EventNoteOutlinedIcon />
-            <span>Event</span>
-          </button>
-
-          <button>
-            <ArticleOutlinedIcon />
-            <span>Write article</span>
-          </button>
-        </div>
-      </ShareBox>
-      <Content>
-        {
-          props.loading && <img src='./images/spin-loading.gif' />
-        }
-        <Article>
-          <SharedActor>
-            <a >
-              <img src="/images/user.svg" alt="" />
+    <>
+      {
+        props.articles.length === 0 ?
+          <p>There are no articles!</p>
+          :
+          <Container>
+            <ShareBox>
               <div>
-                <span>Title</span>
-                <span>Info</span>
-                <span>Date</span>
+                {props.user && props.user.photoURL ?
+                  <img src={props.user.photoURL} />
+                  :
+                  <img src="/images/user.svg" alt="" />
+                }
+                <button onClick={handleClick} disabled={props.loading} >Start a post</button>
               </div>
-            </a>
-            <button>
-              <MoreHorizIcon />
-            </button>
-          </SharedActor>
-          <Description>Description</Description>
-          <SharedImg>
-            <a>
-              <img src="/images/climb.jpg" alt="shared" />
-            </a>
-          </SharedImg>
-          <SocialCounts>
-            <li>
-              <button>
-                <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" alt="like" />
-                <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" alt="clap" />
-                <span>95</span>
-              </button>
+              <div>
+                <button>
+                  <InsertPhotoOutlinedIcon className="icon" />
+                  <span>Photo</span>
+                </button>
 
-            </li>
-            <li>
-              <a>2 comments</a>
-            </li>
-          </SocialCounts>
-          <SocialActions>
-            <button>
-              <img src="/images/like-icon.png" alt="like" />
-              <span>Like</span>
-            </button>
-            <button>
-              <img src="/images/comments-icon.jpg" alt="comment" />
-              <span>Comments</span>
-            </button>
-            <button>
-              <img src="/images/share-icon.png" alt="share" />
-              <span>Share</span>
-            </button>
-            <button>
-              <img src="/images/send-icon.png" alt="send" />
-              <span>Send</span>
-            </button>
-          </SocialActions>
-        </Article>
-        </Content>
-      <PostModal showModal={showModal} handleClick={handleClick} />
-    </Container>
+                <button>
+                  <OndemandVideoOutlinedIcon />
+                  <span>Video</span>
+                </button>
+
+                <button>
+                  <EventNoteOutlinedIcon />
+                  <span>Event</span>
+                </button>
+
+                <button>
+                  <ArticleOutlinedIcon />
+                  <span>Write article</span>
+                </button>
+              </div>
+            </ShareBox>
+            <Content>
+              {
+                props.loading && <img src='./images/spin-loading.gif' />
+              }
+              <Article>
+                <SharedActor>
+                  <a >
+                    <img src="/images/user.svg" alt="" />
+                    <div>
+                      <span>Title</span>
+                      <span>Info</span>
+                      <span>Date</span>
+                    </div>
+                  </a>
+                  <button>
+                    <MoreHorizIcon />
+                  </button>
+                </SharedActor>
+                <Description>Description</Description>
+                <SharedImg>
+                  <a>
+                    <img src="/images/climb.jpg" alt="shared" />
+                  </a>
+                </SharedImg>
+                <SocialCounts>
+                  <li>
+                    <button>
+                      <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" alt="like" />
+                      <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" alt="clap" />
+                      <span>95</span>
+                    </button>
+
+                  </li>
+                  <li>
+                    <a>2 comments</a>
+                  </li>
+                </SocialCounts>
+                <SocialActions>
+                  <button>
+                    <img src="/images/like-icon.png" alt="like" />
+                    <span>Like</span>
+                  </button>
+                  <button>
+                    <img src="/images/comments-icon.jpg" alt="comment" />
+                    <span>Comments</span>
+                  </button>
+                  <button>
+                    <img src="/images/share-icon.png" alt="share" />
+                    <span>Share</span>
+                  </button>
+                  <button>
+                    <img src="/images/send-icon.png" alt="send" />
+                    <span>Send</span>
+                  </button>
+                </SocialActions>
+              </Article>
+            </Content>
+            <PostModal showModal={showModal} handleClick={handleClick} />
+          </Container>
+      }
+    </>
   );
 };
 
@@ -333,11 +345,12 @@ const mapStateToProps = (state) => {
   return {
     loading: state.articleState.loading,
     user: state.userState.user,
+    articles: state.articleState.articles,
   }
 }
 
 const mapDispatchTopProps = (dispatch) => ({
-
+  getArticles: () => dispatch(getArticlesAPI())
 })
 
 export default connect(mapStateToProps, mapDispatchTopProps)(Main);
