@@ -1,39 +1,39 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { signInAPI } from '../actions';
-import { Redirect} from 'react-router';
+import { Redirect } from 'react-router';
 
 const Login = (props) => {
-    return (
-        <Container>
-            {
-                props.user && <Redirect to='/home' />
-            }
-            <Nav>
+  return (
+    <Container>
+      {
+        props.user && <Redirect to='/home' />
+      }
+      <Nav>
 
-                <a href="">
-                    <img src="/images/login-logo.svg" alt="login" />
-                </a>
-                <div>
-                    <Join>Join Now</Join>
-                    <SignIn>Sign In</SignIn>
-                </div>
-            </Nav>
-            <Section>
-                <Hero>
-                    <h1>Welcome to your professional community</h1>
-                    <img src="/images/login-hero.svg" alt="hero" />
-                </Hero>
-                <Form>
-                    <Google onClick={()=>props.signIn()}>
-                        <img src="/images/google.svg" alt="google" />
-                        Sign in with Google
-                    </Google>
-                </Form>
-            </Section>
-        </Container>
-    )
+        <a href="">
+          <img src="/images/login-logo.svg" alt="login" />
+        </a>
+        <div>
+          <Join>Join Now</Join>
+          <SignIn>Sign In</SignIn>
+        </div>
+      </Nav>
+      <Section>
+        <Hero>
+          <h1>Welcome to your professional community</h1>
+          <img src="/images/login-hero.svg" alt="hero" />
+        </Hero>
+        <Form>
+          <Google onClick={() => props.signIn()}>
+            <img src="/images/google.svg" alt="google" />
+            Sign in with Google
+          </Google>
+        </Form>
+      </Section>
+    </Container>
+  )
 }
 
 const Container = styled.div`
@@ -168,13 +168,13 @@ const Google = styled.button`
 
 `
 const mapStateToProps = (state) => {
-    return {
-        user: state.userState.user,
-    }
+  return {
+    user: state.userState.user,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    signIn: () => dispatch(signInAPI())
+  signIn: () => dispatch(signInAPI())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

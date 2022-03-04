@@ -4,87 +4,87 @@ import { connect } from 'react-redux';
 import { signOutAPI } from '../actions';
 
 const Header = (props) => {
-    return (
-        <Container>
-            <Content>
-                <Logo>
-                    <a href="/home"><img src="/images/home-logo.svg" alt="home" /></a>
-                </Logo>
-                <Search>
-                    <div>
-                        <input type="text" placeholder='Search' />
-                    </div>
-                    <SearchIcon>
-                        <img src="/images/search-icon.svg" alt="search" />
-                    </SearchIcon>
-                </Search>
-                <Nav>
-                    <NavlistWrap>
-                        <Navlist className='active'>
-                            <a>
-                                <img src="/images/nav-home.svg" alt="home" />
-                                <span>Home</span>
-                            </a>
-                        </Navlist>
+  return (
+    <Container>
+      <Content>
+        <Logo>
+          <a href="/home"><img src="/images/home-logo.svg" alt="home" /></a>
+        </Logo>
+        <Search>
+          <div>
+            <input type="text" placeholder='Search' />
+          </div>
+          <SearchIcon>
+            <img src="/images/search-icon.svg" alt="search" />
+          </SearchIcon>
+        </Search>
+        <Nav>
+          <NavlistWrap>
+            <Navlist className='active'>
+              <a>
+                <img src="/images/nav-home.svg" alt="home" />
+                <span>Home</span>
+              </a>
+            </Navlist>
 
-                        <Navlist>
-                            <a>
-                                <img src="/images/nav-network.svg" alt="home" />
-                                <span>My Network</span>
-                            </a>
-                        </Navlist>
+            <Navlist>
+              <a>
+                <img src="/images/nav-network.svg" alt="home" />
+                <span>My Network</span>
+              </a>
+            </Navlist>
 
-                        <Navlist>
-                            <a>
-                                <img src="/images/nav-jobs.svg" alt="home" />
-                                <span>Jobs</span>
-                            </a>
-                        </Navlist>
+            <Navlist>
+              <a>
+                <img src="/images/nav-jobs.svg" alt="home" />
+                <span>Jobs</span>
+              </a>
+            </Navlist>
 
-                        <Navlist>
-                            <a>
-                                <img src="/images/nav-messaging.svg" alt="home" />
-                                <span>Messaging</span>
-                            </a>
-                        </Navlist>
+            <Navlist>
+              <a>
+                <img src="/images/nav-messaging.svg" alt="home" />
+                <span>Messaging</span>
+              </a>
+            </Navlist>
 
-                        <Navlist>
-                            <a>
-                                <img src="/images/nav-notifications.svg" alt="home" />
-                                <span>Notifications</span>
-                            </a>
-                        </Navlist>
-                        <User>
-                            <a>
-                                {
-                                    props.user && props.user.photoURL ? (
-                                        <img src={props.user.photoURL} alt="user" />
-                                    ) : (
-                                        <img src='/images/user.svg' alt="user-image" />
-                                    )
-                                }
-                                <span>
-                                    Me
-                                    <img src="/images/down-icon.svg" alt="down" />
-                                </span>
-                            </a>
-                            <SignOut onClick={() => props.SignOut()}>
-                                <a href="">Sign Out</a>
-                            </SignOut>
-                        </User>
-                        <Work>
-                            <a>
-                                <img src="/images/nav-work.svg" alt="work" />
-                                <span>Work
-                                    <img src="images/down-icon.svg" alt="down" />
-                                </span>
-                            </a>
-                        </Work>
-                    </NavlistWrap>
-                </Nav>
-            </Content>
-        </Container>
-    )
+            <Navlist>
+              <a>
+                <img src="/images/nav-notifications.svg" alt="home" />
+                <span>Notifications</span>
+              </a>
+            </Navlist>
+            <User>
+              <a>
+                {
+                  props.user && props.user.photoURL ? (
+                    <img src={props.user.photoURL} alt="user" />
+                  ) : (
+                    <img src='/images/user.svg' alt="user-image" />
+                  )
+                }
+                <span>
+                  Me
+                  <img src="/images/down-icon.svg" alt="down" />
+                </span>
+              </a>
+              <SignOut onClick={() => props.SignOut()}>
+                <a href="">Sign Out</a>
+              </SignOut>
+            </User>
+            <Work>
+              <a>
+                <img src="/images/nav-work.svg" alt="work" />
+                <span>Work
+                  <img src="images/down-icon.svg" alt="down" />
+                </span>
+              </a>
+            </Work>
+          </NavlistWrap>
+        </Nav>
+      </Content>
+    </Container>
+  )
 }
 
 const Container = styled.div`
@@ -96,7 +96,6 @@ const Container = styled.div`
     top: 0;
     width: 100vw;
     z-index: 100;
-
     `
 
 const Content = styled.div`
@@ -105,12 +104,10 @@ const Content = styled.div`
     margin: 0 auto;
     min-height: 100%;
     max-width: 1128px;
-
 `
 const Logo = styled.span`
     margin-right:8px;
     font-size: 0px;
-
 `
 
 const Search = styled.div`
@@ -133,7 +130,6 @@ const Search = styled.div`
             height: 34px;
             border-color: #dce6f1;
             vertical-align: text-top;
-
         }
     }
     `
@@ -160,8 +156,6 @@ const Nav = styled.div`
         bottom: 0;
         background-color: white;
         width: 100%;
-
-
     }
 `
 
@@ -183,7 +177,6 @@ const NavlistWrap = styled.ul`
             border-color: rgba(0,0,0,0.9);
         }
     }
-
 `
 
 const Navlist = styled.li`
@@ -266,13 +259,13 @@ const Work = styled(User)`
     `
 
 const mapStateToProps = (state) => {
-    return {
-        user: state.userState.user
-    }
+  return {
+    user: state.userState.user
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    signOut: () => dispatch(signOutAPI())
+  signOut: () => dispatch(signOutAPI())
 })
 
 

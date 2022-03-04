@@ -8,6 +8,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PostModal from "./PostModal";
 import { connect } from "react-redux";
 import { getArticlesAPI } from "../actions";
+import ReactPlayer from "react-player";
 
 const Main = (props) => {
   const [showModal, setShowModal] = useState("close");
@@ -74,61 +75,70 @@ const Main = (props) => {
               </div>
             </ShareBox>
             <Content>
-              {
-                props.loading && <img src='./images/spin-loading.gif' />
-              }
-              <Article>
-                <SharedActor>
-                  <a >
-                    <img src="/images/user.svg" alt="" />
-                    <div>
-                      <span>Title</span>
-                      <span>Info</span>
-                      <span>Date</span>
-                    </div>
-                  </a>
-                  <button>
-                    <MoreHorizIcon />
-                  </button>
-                </SharedActor>
-                <Description>Description</Description>
-                <SharedImg>
-                  <a>
-                    <img src="/images/climb.jpg" alt="shared" />
-                  </a>
-                </SharedImg>
-                <SocialCounts>
-                  <li>
-                    <button>
-                      <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" alt="like" />
-                      <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" alt="clap" />
-                      <span>95</span>
-                    </button>
+              {props.loading && <img src='./images/spin-loading.gif' />}
+              {props.articles.length &&
+                props.articles.map((article, key) => (
+                  <Article key={key} >
+                    <SharedActor>
+                      <a>
+                        <img src={article.actor.image} alt="article writer" />
+                        <div>
+                          <span>{article.actor.title}</span>
+                          <span>{article.actor.description}</span>
+                          <span>{article.actor.date.toDate().toLocaleDateString()}</span>
+                        </div>
+                      </a>
+                      <button>
+                        <MoreHorizIcon />
+                      </button>
+                    </SharedActor>
+                    <Description>{article.description}</Description>
+                    <SharedImg>
+                      <a>
+                        {!article.SharedImg && article.video
+                          ?
+                          <ReactPlayer width={'100%'} url={article.video} />
+                          :
+                          (
+                            article.sharedImg && <img src={article.sharedImg} />
+                          )
+                        }
+                      </a>
+                    </SharedImg>
+                    <SocialCounts>
+                      <li>
+                        <button>
+                          <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" alt="like" />
+                          <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" alt="clap" />
+                          <span>95</span>
+                        </button>
 
-                  </li>
-                  <li>
-                    <a>2 comments</a>
-                  </li>
-                </SocialCounts>
-                <SocialActions>
-                  <button>
-                    <img src="/images/like-icon.png" alt="like" />
-                    <span>Like</span>
-                  </button>
-                  <button>
-                    <img src="/images/comments-icon.jpg" alt="comment" />
-                    <span>Comments</span>
-                  </button>
-                  <button>
-                    <img src="/images/share-icon.png" alt="share" />
-                    <span>Share</span>
-                  </button>
-                  <button>
-                    <img src="/images/send-icon.png" alt="send" />
-                    <span>Send</span>
-                  </button>
-                </SocialActions>
-              </Article>
+                      </li>
+                      <li>
+                        <a>{article.comments}</a>
+                      </li>
+                    </SocialCounts>
+                    <SocialActions>
+                      <button>
+                        <img src="/images/like-icon.png" alt="like" />
+                        <span>Like</span>
+                      </button>
+                      <button>
+                        <img src="/images/comments-icon.jpg" alt="comment" />
+                        <span>Comments</span>
+                      </button>
+                      <button>
+                        <img src="/images/share-icon.png" alt="share" />
+                        <span>Share</span>
+                      </button>
+                      <button>
+                        <img src="/images/send-icon.png" alt="send" />
+                        <span>Send</span>
+                      </button>
+                    </SocialActions>
+                  </Article>
+                ))
+              }
             </Content>
             <PostModal showModal={showModal} handleClick={handleClick} />
           </Container>
@@ -305,6 +315,8 @@ const SocialCounts = styled.ul`
 
         button {
             display: flex;
+            border: none;
+            background-color: white;
         }
     }
 `
@@ -319,8 +331,8 @@ const SocialActions = styled.div`
         align-items: center;
         padding: 8px;
         color: #0a66c2;
-        /* margin: 0 1rem; */
-
+        border: none;
+        background-color: white;
         img {
         width: 1.5rem;
         height: 1.5rem;

@@ -28,12 +28,8 @@ const PostModal = (props) => {
   }
 
   const postArticle = (e) => {
-    console.log("1");
-    console.log("firebase:", firebase);
-
     e.preventDefault();
     if (e.target !== e.currentTarget){
-      console.log("2");
       return
     }
     const payload = {

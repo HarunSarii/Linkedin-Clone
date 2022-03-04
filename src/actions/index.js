@@ -1,5 +1,5 @@
 import { auth, provider, storage } from '../firebase';
-import db from '../firebase'
+import db from '../firebase';
 import { SET_USER, SET_LOADING_STATUS, GET_ARTICLES } from './actionType';
 
 export const setUser = (payload) => ({
@@ -61,9 +61,7 @@ export function postArticleAPI(payload) {
         .ref(`images/${payload.image.name}`)
         .put(payload.image);
       upload.on('state_changed', (snapshot) => {
-        const progress = (
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(`Progress: ${progress}%`);
         if (snapshot.state === "RUNNING") {
           console.log(`Progress: ${progress}%`);
@@ -72,7 +70,7 @@ export function postArticleAPI(payload) {
         async () => {
           const downloadURL = await upload.snapshot.ref.getDownloadURL();
           db.collection("articles").add({
-            actors: {
+            actor: {
               description: payload.user.email,
               title: payload.user.displayName,
               date: payload.timestamp,
@@ -112,7 +110,6 @@ export function getArticlesAPI() {
       .orderBy("actor.date", "desc")
       .onSnapshot((snapshot) => {
         payload = snapshot.docs.map((doc) => doc.data());
-        console.log("payload of get", payload);
         dispatch(getArticles(payload));
       })
   }

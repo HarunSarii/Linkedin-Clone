@@ -25,4 +25,4 @@ const articleReducer = (state = initState, action) => {
     }
 }
 
-export default articleReducer
+export default articleReducer;
