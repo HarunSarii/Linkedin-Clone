@@ -37,43 +37,44 @@ const Main = (props) => {
 
   }
   return (
-    <>
-      {
-        props.articles.length === 0 ?
-          <p>There are no articles!</p>
-          :
-          <Container>
-            <ShareBox>
-              <div>
-                {props.user && props.user.photoURL ?
-                  <img src={props.user.photoURL} />
-                  :
-                  <img src="/images/user.svg" alt="" />
-                }
-                <button onClick={handleClick} disabled={props.loading} >Start a post</button>
-              </div>
-              <div>
-                <button>
-                  <InsertPhotoOutlinedIcon className="icon" />
-                  <span>Photo</span>
-                </button>
 
-                <button>
-                  <OndemandVideoOutlinedIcon />
-                  <span>Video</span>
-                </button>
+    <Container>
+      <ShareBox>
+        <div>
+          {props.user && props.user.photoURL ?
+            <img src={props.user.photoURL} />
+            :
+            <img src="/images/user.svg" alt="" />
+          }
+          <button onClick={handleClick} disabled={props.loading} >Start a post</button>
+        </div>
+        <div>
+          <button>
+            <InsertPhotoOutlinedIcon className="icon" />
+            <span>Photo</span>
+          </button>
 
-                <button>
-                  <EventNoteOutlinedIcon />
-                  <span>Event</span>
-                </button>
+          <button>
+            <OndemandVideoOutlinedIcon />
+            <span>Video</span>
+          </button>
 
-                <button>
-                  <ArticleOutlinedIcon />
-                  <span>Write article</span>
-                </button>
-              </div>
-            </ShareBox>
+          <button>
+            <EventNoteOutlinedIcon />
+            <span>Event</span>
+          </button>
+
+          <button>
+            <ArticleOutlinedIcon />
+            <span>Write article</span>
+          </button>
+        </div>
+      </ShareBox>
+      <>
+        {
+          props.articles.length === 0 ?
+            <p>There are no articles!</p>
+            :
             <Content>
               {props.loading && <img src='./images/spin-loading.gif' />}
               {props.articles.length &&
@@ -110,7 +111,6 @@ const Main = (props) => {
                         <button>
                           <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" alt="like" />
                           <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" alt="clap" />
-                          <span>95</span>
                         </button>
 
                       </li>
@@ -140,10 +140,11 @@ const Main = (props) => {
                 ))
               }
             </Content>
-            <PostModal showModal={showModal} handleClick={handleClick} />
-          </Container>
-      }
-    </>
+        }
+      </>
+      <PostModal showModal={showModal} handleClick={handleClick} />
+    </Container>
+
   );
 };
 
